@@ -18,8 +18,6 @@ public class PlanillaSueldosServices {
     @Autowired
     PlanillaSueldoRepository planillaSueldoRepository;
     @Autowired
-    JustificativoRepository justificativoRepository;
-    @Autowired
     HoraExtraRepository horaExtraRepository;
     @Autowired
     JustificativoService justificativoService;
@@ -27,8 +25,6 @@ public class PlanillaSueldosServices {
     OficinaRRHH oficinaRRHH;
     @Autowired
     HoraExtraService horaExtraService;
-    @Autowired
-    EmpleadoRepository empleadoRepository;
     @Autowired
     EmpleadoService empleadoService;
 
@@ -117,7 +113,7 @@ public class PlanillaSueldosServices {
         planillaSueldoEntity1.setMontoFinal(sueldo);
         planillaSueldoEntities.add(planillaSueldoEntity1);
 
-        if(!ExistePlanilla(planillaSueldoEntity1, planillaSueldoEntities)) {
+        if((!ExistePlanilla(planillaSueldoEntity1, planillaSueldoEntities) && (this.planillaSueldoRepository!=null))) {
             System.out.println("Aca la planilla: "+planillaSueldoEntity1);
             //planillaSueldoEntities.add(planillaSueldoEntity1);
             guardarPlanillaBd(planillaSueldoEntity1);
@@ -157,7 +153,7 @@ public class PlanillaSueldosServices {
         boolean validar = false;
         for (int i = 0; i < planillaSueldoEntities.size(); i++){
             if(planillaSueldoEntities.get(i).getRut().equals(planillaSueldoEntity.getRut()) &&
-                    planillaSueldoEntities.get(i).getMontoFinal() == planillaSueldoEntity.getMontoFinal()){
+                    planillaSueldoEntities.get(i).getMontoFinal() != planillaSueldoEntity.getMontoFinal()){
                 validar = true;
             }
         }
