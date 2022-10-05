@@ -32,11 +32,9 @@ public class PlanillaSueldosServices {
         return (ArrayList<PlanillaSueldoEntity>) planillaSueldoRepository.findAll();
     }
 
-
     public double calcularSueldo(int i, ArrayList<EmpleadoEntity> empleadoEntities, ArrayList<HoraExtraEntity>horaExtraEntities,
                                  OficinaRRHH oficinaRRHH, ArrayList<JustificativoEntity> justificativoEntities, HoraExtraService horaExtraService,
                                  JustificativoService justificativoService, ArrayList<PlanillaSueldoEntity>planillaSueldoEntities) throws ParseException {
-
 
         String rut = empleadoEntities.get(i).getRut();
         String categoria = empleadoEntities.get(i).getCategoria();
@@ -113,9 +111,8 @@ public class PlanillaSueldosServices {
         planillaSueldoEntity1.setMontoFinal(sueldo);
         planillaSueldoEntities.add(planillaSueldoEntity1);
 
-        if((!ExistePlanilla(planillaSueldoEntity1, planillaSueldoEntities) && (this.planillaSueldoRepository!=null))) {
+        if((!ExistePlanilla(planillaSueldoEntity1, planillaSueldoEntities, empleadoEntities) && (this.planillaSueldoRepository!=null))) {
             System.out.println("Aca la planilla: "+planillaSueldoEntity1);
-            //planillaSueldoEntities.add(planillaSueldoEntity1);
             guardarPlanillaBd(planillaSueldoEntity1);
         }
     }
@@ -149,11 +146,13 @@ public class PlanillaSueldosServices {
         }
     }
 
-    public boolean ExistePlanilla(PlanillaSueldoEntity planillaSueldoEntity, ArrayList<PlanillaSueldoEntity>planillaSueldoEntities){
+    public boolean ExistePlanilla(PlanillaSueldoEntity planillaSueldoEntity, ArrayList<PlanillaSueldoEntity>planillaSueldoEntities,
+                                  ArrayList<EmpleadoEntity> empleadoEntities){
         boolean validar = false;
         for (int i = 0; i < planillaSueldoEntities.size(); i++){
-            if(planillaSueldoEntities.get(i).getRut().equals(planillaSueldoEntity.getRut()) &&
-                    planillaSueldoEntities.get(i).getMontoFinal() != planillaSueldoEntity.getMontoFinal()){
+            if((planillaSueldoEntities.get(i).getRut().equals(planillaSueldoEntity.getRut())) &&
+                    (planillaSueldoEntities.get(i).getMontoFinal() != planillaSueldoEntity.getMontoFinal()) &&
+                    (planillaSueldoEntities.size() > empleadoEntities.size())){
                 validar = true;
             }
         }

@@ -101,6 +101,7 @@ public class PlanillaSueldosTest {
 
         empleadoEntities.add(empleado);
         empleadoEntities.add(empleado2);
+        empleadoEntities.add(empleado);
         horaExtraEntities.add(horaExtra);
         horaExtraEntities.add(horaExtra2);
         justificativoEntities.add(justificativo);
@@ -108,8 +109,8 @@ public class PlanillaSueldosTest {
 
         ArrayList<PlanillaSueldoEntity> planillaSueldoEntities = new ArrayList<>();
         double sueldoFinal = 0;
-        for(int i = 0; i < 2; i++){
-            sueldoFinal = planillaSueldosServices.calcularSueldo(0, empleadoEntities, horaExtraEntities, oficinaRRHH,justificativoEntities
+        for(int i = 0; i < 3; i++){
+            sueldoFinal = planillaSueldosServices.calcularSueldo(i, empleadoEntities, horaExtraEntities, oficinaRRHH,justificativoEntities
                     ,horaExtraService, justificativoService, planillaSueldoEntities);
         }
         assertEquals(1400560, sueldoFinal, 0.0);
