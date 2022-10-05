@@ -115,10 +115,11 @@ public class PlanillaSueldosServices {
         planillaSueldoEntity1.setMontoProvisional(cotizacionProvisional);
         planillaSueldoEntity1.setMontoSalud(cotizacionSalud);
         planillaSueldoEntity1.setMontoFinal(sueldo);
-        planillaSueldoEntities.add(planillaSueldoEntity1);
+        //planillaSueldoEntities.add(planillaSueldoEntity1);
 
         if(!ExistePlanilla(planillaSueldoEntity1, planillaSueldoEntities)) {
             System.out.println("Aca la planilla: "+planillaSueldoEntity1);
+            planillaSueldoEntities.add(planillaSueldoEntity1);
             guardarPlanillaBd(planillaSueldoEntity1);
         }
     }
