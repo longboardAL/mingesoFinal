@@ -151,8 +151,7 @@ public class PlanillaSueldosServices {
         boolean validar = false;
         for (int i = 0; i < planillaSueldoEntities.size(); i++){
             if((planillaSueldoEntities.get(i).getRut().equals(planillaSueldoEntity.getRut())) &&
-                    (planillaSueldoEntities.get(i).getMontoFinal() != planillaSueldoEntity.getMontoFinal()) &&
-                    (planillaSueldoEntities.size() > empleadoEntities.size())){
+                    (planillaSueldoEntities.get(i).getMontoFinal() == planillaSueldoEntity.getMontoFinal())){
                 validar = true;
             }
         }
